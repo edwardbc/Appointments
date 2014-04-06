@@ -1,0 +1,8 @@
+{
+  "packages": {
+    "iron-router": {},
+    "iron-router-progress": {},
+    "collection2": {},
+    "bootstrap-3": {}
+  }
+}

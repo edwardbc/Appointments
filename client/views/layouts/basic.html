@@ -1,0 +1,16 @@
+<template name="basicLayout">
+    <header>
+        {{> yield region='header'}}
+    </header>
+    <div id="main">
+        
+      <div class="container-fluid">
+        <div class="row">
+          {{> sidebar}}
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+              {{> yield}}
+          </div>
+        </div>
+      </div>
+    </div>
+</template>
