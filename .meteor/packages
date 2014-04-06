@@ -9,7 +9,6 @@ jquery
 underscore
 iron-router
 accounts-password
-accounts-ui
 iron-router-progress
-collection2
 bootstrap-3
+simple-schema

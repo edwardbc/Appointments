@@ -1,0 +1,21 @@
+<template name="login">
+  <div class="container">
+    <form class="form-public login" role="form">
+      <h2>Ingreso</h2>
+
+      {{> errors}}
+      
+      <input type="user" name="username" class="form-control" placeholder="Usuario" required autofocus>
+      <input type="password" name="password" class="form-control" placeholder="Contraseña" required>
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+
+      <div class="options">
+        <span class="help-block">No tiene cuenta?</span>
+        <a href="{{pathFor 'register'}}">Regístrese</a>
+      </div>
+
+    </form>
+  </div>
+</template>
+

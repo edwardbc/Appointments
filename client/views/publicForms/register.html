@@ -1,0 +1,42 @@
+<template name="register">
+  <div class="container">
+    <form class="form-public register" role="form">
+      <h2>Registro</h2>
+
+      {{> errors}}
+
+      <div class="form-group">
+        <label class="control-label" for="username">Nombre de Usuario</label>
+        <input type="text" class="form-control" name="username">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="user">Contraseña</label>
+        <input type="password" class="form-control" name="password">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="user">Nombre Completo</label>
+        <input type="text" class="form-control" name="name">
+      </div>
+
+      <div class="form-group">
+        <label class="control-label" for="genero">Genero</label>
+        <select class="form-control" name="gender">
+          <option value="">Escoja su género</option>
+          <option value="male">Hombre</option>
+          <option value="female">Mujer</option>
+        </select>
+      </div>
+      
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
+
+      <div class="options left">
+        <a href="{{pathFor 'login'}}">&lt; Volver</a>
+      </div>
+
+    </form>
+  </div>
+</template>
+
