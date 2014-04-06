@@ -1,8 +1,12 @@
 // Check if user is logged for internal pages
 Router.before(function() {
   if (!Meteor.user()){
+    if (Meteor.loggingIn()){
+      this.render(this.loadingTemplate);
+    } else {
+      Router.go('/login');
+    }
     this.stop();
-    Router.go('/login');
   }
 }, {except: ['login', 'register']});
 
