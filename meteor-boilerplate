@@ -31,8 +31,7 @@ case ${1} in
         echo "Template['${2}'].events({"   >> client/views/${2}/${2}.js
         echo "});"                      >> client/views/${2}/${2}.js
         echo ""                         >> client/views/${2}/${2}.js
-        echo "@import '../../stylesheets/variables.less'; "  >> client/views/${2}/${2}.less
-        echo "@import '../../stylesheets/elements.less'; "  >> client/views/${2}/${2}.less
+        echo "@import '../../stylesheets/main.lessimport'; "  >> client/views/${2}/${2}.less
         echo ""                                             >> client/views/${2}/${2}.less
         # Succesful
         echo "Successfully created a view called \"${2}\""
@@ -125,7 +124,7 @@ case ${1} in
         echo "});"                      >> client/modules/${2}/${2}.js
         echo ""                         >> client/modules/${2}/${2}.js
 
-        echo "@import '../../stylesheets/variables.less'; "  >> client/modules/${2}/${2}.less
+        echo "@import '../../stylesheets/main.lessimport'; "  >> client/modules/${2}/${2}.less
         echo ""                                             >> client/modules/${2}/${2}.less
 
         # Succesful
