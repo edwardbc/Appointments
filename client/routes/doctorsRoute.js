@@ -17,7 +17,7 @@ Router.map(function () {
 
 Router.map(function () {
     this.route('editDoctor', {
-      path       : 'doctors/edit',
+      path       : 'doctors/edit/:_id',
       template   : 'editDoctor',
       controller :  DoctorsController
     });
@@ -27,7 +27,13 @@ Router.map(function () {
     this.route('doctors', {
       path       : 'doctors',
       template   : 'doctors',
-      controller :  DoctorsController
+      controller :  DoctorsController,
+      waitOn     : function(){
+        return Meteor.subscribe('doctors', Meteor.userId());
+      },
+      data       : function(){
+        return Doctors.find();
+      }
     });
 });
 

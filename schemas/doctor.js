@@ -1,7 +1,10 @@
 DoctorSchema = new SimpleSchema({
-  _id: {
+  _id: { // Server-side validation
     type     : String,
-    label    : "Nombre",
+    optional : true
+  },
+  userId: { // Server-side validation
+    type     : String,
     optional : true
   },
   name: {

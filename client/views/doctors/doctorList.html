@@ -1,0 +1,34 @@
+<template name="doctorList">
+  <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Especialidades</th>
+          <th>Clínica</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each doctors}}
+          {{> doctorListItem}}
+        {{/each}}  
+      </tbody>
+    </table>
+    <p class="help-block">Total: <strong>{{count}}</strong> doctores</p>
+  </div>
+</template>
+
+<template name="doctorListItem">
+  <tr>
+    <td>{{name}}</td>
+    <td>{{#each specialties}} 
+      {{this}}   
+    {{/each}}</td>
+    <td>{{clinic}}</td>
+    <td class="actions">
+      <a href="{{pathFor 'editDoctor'}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+      <button type="button" class="btn btn-danger btn-sm delete"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+    </td>
+  </tr>
+</template>

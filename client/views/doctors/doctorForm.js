@@ -6,9 +6,12 @@ Template.doctorForm.events({
         fields = Utils.forms.objectify(form),
         isValid;
 
-    // Parse specialties and validate
+    // Parse specialties
     fields.specialties = ($.trim(fields.specialties).length>0) ? 
       fields.specialties.split(' ') : [];
+    // Associate with current user
+    fields.userId = Meteor.userId();
+    // Validate
     isValid = DoctorSchema.namedContext("add").validate(fields);
     
     // Clear previous warnings
@@ -32,7 +35,7 @@ Template.doctorForm.events({
         
       });
       // Display Error
-      Client.Messages.showError('Por favor ingrese todos los datos');
+      Client.Messages.showError('Por favor llene todos los campos');
     } else {
       form.find('.form-group').removeClass('has-error has-success');
       Doctors.insert(fields, function(err){

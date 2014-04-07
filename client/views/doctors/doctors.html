@@ -4,50 +4,8 @@
       <a href="{{pathFor 'addDoctor'}}" class="btn btn-success btn-xs">
         <span class="glyphicon glyphicon-plus"></span> Agregar
       </a>
-    </h1>
-      <div class="table-responsive">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Especialidad</th>
-          <th>Clínica</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Miguel Rojas</td>
-          <td>Cardiólogo</td>
-          <td>Clínica Panamericana</td>
-          <td class="actions">
-            <button type="button" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
-            <button type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Miguel Rojas</td>
-          <td>Cardiólogo</td>
-          <td>Clínica Panamericana</td>
-          <td class="actions">
-            <button type="button" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
-            <button type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-          </td>
-        </tr>
-        <tr>
-          <td>Miguel Rojas</td>
-          <td>Cardiólogo</td>
-          <td>Clínica Panamericana</td>
-          <td class="actions">
-            <button type="button" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</button>
-            <button type="button" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
-          </td>
-        </tr>   
-      </tbody>
-    </table>
-    <p class="help-block">Total: <strong>3</strong> doctores</p>
-
-  </div>
+      </h1>
+      {{> doctorList}}
 </template>
 
 
