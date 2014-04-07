@@ -9,7 +9,7 @@ Client.Messages = {
   add   : function(message, type){
     this.data.insert({message: message, seen: false, type: type});
   },
-  showSucess: function(message){
+  showSuccess: function(message){
     this.add(message, 'success');
   },
   showInfo: function(message){
