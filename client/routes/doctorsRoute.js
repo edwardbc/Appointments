@@ -19,7 +19,13 @@ Router.map(function () {
     this.route('editDoctor', {
       path       : 'doctors/edit/:_id',
       template   : 'editDoctor',
-      controller :  DoctorsController
+      controller :  DoctorsController,
+      waitOn     : function(){
+        return Meteor.subscribe('doctor', this.params._id);
+      },
+      data       : function(){
+        return Doctors.findOne();
+      }
     });
 });
 

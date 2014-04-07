@@ -6,3 +6,12 @@ Template.doctorList.helpers({
     return Doctors.find().count();
   }
 });
+
+Template.doctorList.events({
+  'click tr .remove' : function(e){
+    e.preventDefault();
+    if(this._id){
+      Doctors.remove(this._id);
+    }
+  }
+})

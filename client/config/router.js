@@ -1,5 +1,5 @@
 // Check if user is logged for internal pages
-Router.before(function() {
+Router.onBeforeAction(function() {
   if (!Meteor.user()){
     if (Meteor.loggingIn()){
       this.render(this.loadingTemplate);
@@ -11,7 +11,7 @@ Router.before(function() {
 }, {except: ['login', 'register']});
 
 // Check if user is already logged when reaching login/register
-Router.before(function() {
+Router.onBeforeAction(function() {
   if (Meteor.user()){
     Router.go('/');
     this.stop();
@@ -19,7 +19,7 @@ Router.before(function() {
 }, {only: ['login', 'register']});
 
 // Clear existing messages on navigating
-Router.before(function() {
+Router.onBeforeAction(function() {
   Client.Messages.clear();
 });
 

@@ -3,31 +3,34 @@
     {{> errors}}
     <div class="form-group">
       <label class="control-label" for="username">Nombre</label>
-      <input type="text" class="form-control" name="name">
+      <input type="text" class="form-control" name="name" value={{name}}>
     </div>
 
     <div class="form-group">
       <label class="control-label" for="user">Teléfono</label>
-      <input type="text" class="form-control" name="phone">
+      <input type="text" class="form-control" name="phone" value={{phone}}>
     </div>
 
     <div class="form-group">
       <label class="control-label" for="user">Correo Electrónico</label>
-      <input type="text" class="form-control" name="email">
+      <input type="text" class="form-control" name="email" value="{{email}}">
     </div>
 
     <div class="form-group">
       <label class="control-label" for="user">Especialidades</label>
-      <input type="text" class="form-control" name="specialties">
-      <p class="help-block">Especialidades separadas por espacios</p>
+      <input type="text" class="form-control" name="specialties" value="{{specialties}}">
+      <p class="help-block">Especialidades separadas por comas</p>
     </div>
 
     <div class="form-group">
       <label class="control-label" for="user">Clínica</label>
-      <input type="text" class="form-control" name="clinic">
+      <input type="text" class="form-control" name="clinic" value="{{clinic}}">
     </div>
-
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar</button>
+    {{#if isNew}}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar</button>
+    {{else}}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Actualizar</button>
+    {{/if}}
   </form>
   
 </template>

@@ -1,3 +1,9 @@
+Template.doctorForm.helpers({
+  isNew: function(){
+    return (!this._id);
+  }
+});
+
 Template.doctorForm.events({
   'click button[type=submit]' : function(e, t){
     e.preventDefault();
@@ -8,7 +14,7 @@ Template.doctorForm.events({
 
     // Parse specialties
     fields.specialties = ($.trim(fields.specialties).length>0) ? 
-      fields.specialties.split(' ') : [];
+      fields.specialties.split(',') : [];
     // Associate with current user
     fields.userId = Meteor.userId();
     // Validate
@@ -37,15 +43,29 @@ Template.doctorForm.events({
       // Display Error
       Client.Messages.showError('Por favor llene todos los campos');
     } else {
+      // Clear form highlights
       form.find('.form-group').removeClass('has-error has-success');
-      Doctors.insert(fields, function(err){
-        if (err){
-          Client.Messages.showError(err.reason);
-        } else {
-          form.find('input').val('').eq(0).focus();
-          Client.Messages.showSuccess('Doctor agregado correctamente');
-        }
-      });
+      // If editing an exiting doctor
+      if (this._id){
+        console.log('update', fields);
+        Doctors.update(this._id, { $set: fields }, function(err){
+          if (err){
+            Client.Messages.showError(err.reason);
+          } else {
+            form.find('input').eq(0).focus();
+            Client.Messages.showSuccess('Datos actualizados');
+          }
+        });
+      } else {
+        Doctors.insert(fields, function(err){
+          if (err){
+            Client.Messages.showError(err.reason);
+          } else {
+            form.find('input').val('').eq(0).focus();
+            Client.Messages.showSuccess('Doctor agregado correctamente');
+          }
+        });
+      }
     }
   }
 });
