@@ -23,25 +23,31 @@ Template.doctorForm.events({
     // Clear previous warnings
     Client.Messages.clear();
 
+
     if (!isValid){
       // Map schema invalid keys
-      var invalidKeys = DoctorSchema.namedContext("add")
-          .invalidKeys().map(function(field){
-            return field.name;
-          });
+      var invalidKeys = [],
+          emptyFields = false;
+
+      // Show Error Messages
+      DoctorSchema.namedContext("add")
+        .invalidKeys().forEach(function(error){
+          invalidKeys.push(error.name);
+          console.log(error);
+          if (error.type=='required' || error.type=='minCount'){
+            emptyFields = true;
+          } else {
+            Client.Messages.showError(error.message);
+          }
+        });
+
+      if (emptyFields){
+        Client.Messages.showError(SimpleSchema._globalMessages.defaultRequired);
+      }
 
       // Highlight invalid inputs
-      form.find('input, select').each(function(){
-        var name   = $(this).attr('name'),
-            parent = $(this).parent(), 
-            isInvalid = _.contains(invalidKeys, name);
-        
-        parent.toggleClass('has-error', isInvalid)
-              .toggleClass('has-success', !isInvalid);
-        
-      });
-      // Display Error
-      Client.Messages.showError('Por favor llene todos los campos');
+      Utils.forms.highlight(form, invalidKeys);
+
     } else {
       // Clear form highlights
       form.find('.form-group').removeClass('has-error has-success');

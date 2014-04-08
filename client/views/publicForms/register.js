@@ -17,15 +17,8 @@ Template.register.events({
           });
 
       // Highlight invalid inputs
-      form.find('input, select').each(function(){
-        var name   = $(this).attr('name'),
-            parent = $(this).parent(), 
-            isInvalid = _.contains(invalidKeys, name);
-        
-        parent.toggleClass('has-error', isInvalid)
-              .toggleClass('has-success', !isInvalid);
-        
-      });
+      Utils.forms.highlight(form, invalidKeys);
+
       // Display Error
       Client.Messages.showError('Por favor ingrese todos los datos');
     } else {

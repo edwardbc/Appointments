@@ -17,7 +17,8 @@ DoctorSchema = new SimpleSchema({
   },
   email: {
     type  : String,
-    label : "Correo"
+    label : "Correo",
+    regEx : SimpleSchema.RegEx.Email
   },
   specialties: {
     type     : [String],
@@ -28,4 +29,6 @@ DoctorSchema = new SimpleSchema({
     type  : String,
     label : "Clínica"
   }
+}, {
+  defineBuiltInRegExMessages : false
 });

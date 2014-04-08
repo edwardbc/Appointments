@@ -15,4 +15,6 @@ UserSchema = new SimpleSchema({
     type: String,
     label: "Género"
   }
+}, {
+  defineBuiltInRegExMessages : false
 });
