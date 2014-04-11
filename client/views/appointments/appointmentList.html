@@ -1,0 +1,38 @@
+<template name="appointmentList">
+    <div class="table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Etiquetas</th>
+          <th>Doctor</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each appointments}}
+          {{> appointmentListItem}}
+        {{/each}}  
+      </tbody>
+    </table>
+    <p class="help-block">Total: <strong>{{count}}</strong> citas</p>
+  </div>
+</template>
+
+<template name="appointmentListItem">
+  <tr>
+    <td>{{formatDate date format="DD/MM/YY"}}</td>
+    <td>{{formatDate date format="hh:mm a"}}</td>
+    <td>
+      {{#each tags}} 
+        {{this}}   
+      {{/each}}
+    </td>
+    <td>{{doctor.name}}</td>
+    <td class="actions">
+      <a href="{{pathFor 'editAppointment'}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
+      <button type="button" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>
+    </td>
+  </tr>
+</template>

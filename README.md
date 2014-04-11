@@ -5,7 +5,7 @@ A proof-of-concept Meteor simple application to keep track of medical appointmen
 The main purposes of this project are:
 * Keep up to date with latest Meteor releases
 * Demonstrate a simple and quick way to create custom account management without the accounts-ui package
-* Learn and implement D3 for data visualization 
+* Learn and implement D3 for data visualization (will temporarily use an existing library)
 
 ### Basic Functionality
 * User accounts
@@ -21,6 +21,18 @@ The main purposes of this project are:
 * underscore
 * iron-router
 * iron-router-progress
-* meteor-boilerplate (modified)
 * accounts-password
 * simple-schema
+* meteor-boilerplate (modified)
+
+### Standalone Libraries
+* bootstrap-datepicker
+* Moment.js
+
+
+### To Do
+- Unify common code between model allow/deny rules
+- Reports
+- Control Panel
+- Profile Management
+- Data Export (spreadsheet)

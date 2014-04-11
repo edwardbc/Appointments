@@ -4,11 +4,11 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-less
-jquery
 underscore
 iron-router
+jquery
+less
 accounts-password
-iron-router-progress
 bootstrap-3
 simple-schema
+audit-argument-checks

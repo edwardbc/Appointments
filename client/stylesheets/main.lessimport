@@ -1,5 +1,3 @@
-
-//@import 'lib/lesshat.lessimport';
 @import 'lib/variables.lessimport';
 
 

@@ -1,8 +1,7 @@
 
 Client = {};
 
-
-// Pattern influenced by
+// Message Pattern influenced by
 // https://github.com/DiscoverMeteor/Microscope/blob/master/client/helpers/errors.js
 Client.Messages = {
   data  : new Meteor.Collection(null),

@@ -1,5 +1,5 @@
 Deps.autorun(function () {
-    document.title = Session.get('sitetitle') || 'Appointments';
+    document.title = Session.get('sitetitle') || 'Citas';
 });
 
 window.SiteTitle = {

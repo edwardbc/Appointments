@@ -1,0 +1,8 @@
+<template name="selectbox">
+  <select class="form-control" name="{{name}}">
+    <option value="">{{defaultText}}</option>
+  {{#each this.data}}
+    <option value="{{_id}}" {{isSelected ../value}}>{{name}}</option>
+  {{/each}}
+  </select>
+</template>

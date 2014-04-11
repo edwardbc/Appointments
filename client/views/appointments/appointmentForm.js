@@ -1,28 +1,38 @@
-Template.doctorForm.helpers({
+Template.appointmentForm.helpers({
   isNew: function(){
     return (!this._id);
   }
 });
 
-Template.doctorForm.events({
+Template.appointmentForm.events({
   'click button[type=submit]' : function(e, t){
     e.preventDefault();
+    
+    // Clear previous warnings
+    Client.Messages.clear();
+
     // Parse form fields
     var form = $(t.find('form')),
         fields = Utils.forms.objectify(form),
         isValid;
 
-    // Parse specialties
-    fields.specialties = ($.trim(fields.specialties).length>0) ? 
-      fields.specialties.split(',') : [];
-    // Associate with current user
-    fields.userId = Meteor.userId();
-    // Validate
-    isValid = DoctorSchema.namedContext("add").validate(fields);
+    _.extend(fields,{
+      userId : Meteor.userId(),
+      date   : fields.date ? new Date(fields.date+' '+fields.time) : null
+    });
     
-    // Clear previous warnings
-    Client.Messages.clear();
+    fields.doctor = (fields.doctor) ? 
+      _.pick(Doctors.findOne(fields.doctor), '_id', 'name', 'specialties') : null;
 
+    // Parse tags
+    fields.tags = ($.trim(fields.tags).length>0) ? 
+      fields.tags.split(',') : [];
+
+    // Remove unused fields to avoid schema conflicts
+    delete fields.time;
+
+    // Validate
+    isValid = AppointmentSchema.namedContext("form").validate(fields);
 
     if (!isValid){
       // Map schema invalid keys
@@ -30,7 +40,7 @@ Template.doctorForm.events({
           emptyFields = false;
 
       // Show Error Messages
-      DoctorSchema.namedContext("add")
+      AppointmentSchema.namedContext("form")
         .invalidKeys().forEach(function(error){
           invalidKeys.push(error.name);
           if (error.type=='required' || error.type=='minCount'){
@@ -51,28 +61,27 @@ Template.doctorForm.events({
       // Clear form highlights
       Utils.forms.highlight(form, null);
       $(window).scrollTop(0,0);
-
-      // If editing an existing doctor
+      
+      // If editing an existing appointment
       if (this._id){
-        Doctors.update(this._id, { $set: fields }, function(err){
+        Appointments.update(this._id, { $set: fields }, function(err){
           if (err){
             Client.Messages.showError(err.reason);
           } else {
-            form.find('input').eq(0).focus();
             Client.Messages.showSuccess('Datos actualizados');
           }
         });
       } else {
-        Doctors.insert(fields, function(err){
+        Appointments.insert(fields, function(err){
           if (err){
             Client.Messages.showError(err.reason);
           } else {
             Utils.forms.reset(form);
-            form.find('input').eq(0).focus();
-            Client.Messages.showSuccess('Doctor agregado correctamente');
+            Client.Messages.showSuccess('Cita agregada correctamente');
           }
         });
       }
     }
   }
 });
+

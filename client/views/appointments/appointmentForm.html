@@ -1,0 +1,38 @@
+<template name="appointmentForm">
+  <form class="form-appointment">
+    {{#with appointment}}
+    {{> errors}}
+    <div class="form-group">
+      <label class="control-label" for="date">Fecha</label>
+      <input type="text" class="form-control" name="date" data-provide="datepicker" value={{formatDate date format="DD/MM/YY"}}>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="time">Hora</label>
+      <input type="time" class="form-control" name="time" value={{formatDate date format='hh:mm'}}>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="user">Doctor</label>
+      {{> selectbox data=../doctors name='doctor' value=doctor._id }}
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="user">Etiquetas</label>
+      <input type="text" class="form-control" name="tags" value="{{tags}}">
+      <p class="help-block">Etiquetas separadas por comas</p>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="user">Notas</label>
+      <textarea class="form-control" rows="3" name="notes">{{notes}}</textarea>
+    </div>
+    {{#if isNew}}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Agregar</button>
+    {{else}}
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Actualizar</button>
+    {{/if}}
+    {{/with}}
+  </form>
+  <p><a href="{{pathFor 'appointments'}}">&lt; Volver</a></p>
+</template>
