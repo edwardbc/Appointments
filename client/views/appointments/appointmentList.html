@@ -11,9 +11,10 @@
         </tr>
       </thead>
       <tbody>
+        {{!-- Needs a proper helper}}
         {{#each appointments}}
           {{> appointmentListItem}}
-        {{/each}}  
+        {{/each}}
       </tbody>
     </table>
     {{#unless limit}}

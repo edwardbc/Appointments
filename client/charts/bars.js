@@ -1,13 +1,14 @@
 Chart = window.Chart || {};
 
-Chart.bars = function(selector, dataset, options){
+Chart.bars = function(dataset, options){
+  if (!options) return;
 
   // Dimensions and style attributes
   var margin = { 
       top: 20, right: 30, bottom: 30, left:40
     },
-    w = 694 - margin.left - margin.right,
-    h = 380 - margin.top - margin.bottom;
+    w = options.width - margin.left - margin.right,
+    h = options.height - margin.top - margin.bottom;
 
   var ranges = {
     start: new Date(2014, 0, 1),
@@ -18,7 +19,7 @@ Chart.bars = function(selector, dataset, options){
       barWidth = Math.floor(w / intervals.length)-10;
 
   // Bar Chart
-  var chart = d3.select(selector)
+  var chart = d3.select(options.element)
     .append('svg')
       .attr('width',  w+margin.left+margin.right)
       .attr('height', h+margin.top+margin.bottom)
@@ -81,7 +82,10 @@ Chart.bars = function(selector, dataset, options){
   };
 
   this.update = function(dataset){
-    this.parseData(dataset);
+    if (dataset){
+      this.parseData(dataset);
+    }
+    console.log('redrwa');
     y.domain([0, d3.max(this.data, function(d){ return (d.count) } )]);
     
     var bar = chart.selectAll('.bar')

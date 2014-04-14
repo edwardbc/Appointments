@@ -1,6 +1,7 @@
 Template.appointmentList.helpers({
   appointments: function(){
-    return Appointments.find();
+    var options = (this.limit) ? { limit:this.limit } : {};
+    return Appointments.find({}, options);
   },
   count : function(){
     return Appointments.find().count();
