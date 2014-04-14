@@ -17,9 +17,11 @@ Template.appointmentForm.events({
         isValid;
 
     _.extend(fields,{
-      userId : Meteor.userId(),
-      date   : fields.date ? new Date(fields.date+' '+fields.time) : null
+      userId : Meteor.userId()
     });
+    var date = fields.date+'';
+    fields.date = moment(date+' '+fields.time,'DD/MM/YYYY').toDate()
+
     
     fields.doctor = (fields.doctor) ? 
       _.pick(Doctors.findOne(fields.doctor), '_id', 'name', 'specialties') : null;

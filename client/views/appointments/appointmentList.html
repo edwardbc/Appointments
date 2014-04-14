@@ -16,7 +16,9 @@
         {{/each}}  
       </tbody>
     </table>
+    {{#unless limit}}
     <p class="help-block">Total: <strong>{{count}}</strong> citas</p>
+    {{/unless}}
   </div>
 </template>
 

@@ -1,5 +1,6 @@
 
 UI.registerHelper('formatDate', function(date, options){
+  if (!date) return;
   return moment(date).format(options.hash.format || '');
 });
 
