@@ -1,25 +1,24 @@
 Template.home.rendered = function(){
   var self = this;
-  var width = $(this.firstNode).width(),
-      height = width*.4;
-
-  var resizeChart = _.debounce(function(){
-    if (self.chart)
-      self.chart.update(); // Not working yet
-  }, 300);
-  $(window).resize(resizeChart);
+  var width = $(this.firstNode).width();
 
   Deps.autorun(function () {
     var data = Appointments.find();
-    if (!self.chart){
-      self.chart = new Chart.bars(data, {
-        element : '#canvas',
-        width   : width,
-        height  : height
+    if (!self.chartBars){
+      self.chartBars = new Chart.bars(data, {
+        element : '#bars',
+        width   : width*.5,
+        height  : width*.3
       });
     } else {
-      self.chart.update(data);
+      self.chartBars.update(data);
     }
   });
+  
 
+  this.chartPie = new Chart.pie(null, {
+    element : '#bars',
+    width   : width*.5,
+    height  : width*.4 
+  });
 }
