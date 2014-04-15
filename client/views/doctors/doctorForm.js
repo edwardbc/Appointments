@@ -13,6 +13,7 @@ Template.doctorForm.events({
     // Parse form fields
     var form = $(t.find('form')),
         fields = Utils.forms.objectify(form),
+        self = this,
         isValid;
 
     // Associate with current user
@@ -54,12 +55,13 @@ Template.doctorForm.events({
 
       // If editing an existing doctor
       if (this._id){
-        Doctors.update(this._id, { $set: fields }, function(err){
+        Doctors.update(this._id, { $set: fields }, function(err, doc){
           if (err){
             Client.Messages.showError(err.reason);
           } else {
             form.find('input').eq(0).focus();
             Client.Messages.showSuccess('Datos actualizados');
+            Meteor.call('updateDoctorReferences', self._id, fields);
           }
         });
       } else {

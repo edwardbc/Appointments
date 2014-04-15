@@ -33,3 +33,32 @@ Doctors.allow({
   }
 });
 
+Meteor.methods({
+  'updateDoctorReferences' : function(id, doc){
+    check(id, String);
+    check(doc, Object);
+    if (!doc)
+      throw new Meteor.Error(400, 'Please provide the proper data');
+
+    if (doc.userId!==this.userId)
+      throw new Meteor.Error(400, 'Access Denied');
+
+    // Update related appointments to keep integrity
+    Appointments.update({
+        'doctor._id': id, 
+      }, {
+        $set: { 
+          'doctor.name'      : doc.name, 
+          'doctor.specialty' : doc.specialty }
+      }, {
+        multi: true
+      },
+      function(err, n){
+        console.log('Modified Entries:', n);
+        if (err){
+          throw new Meteor.Error(err.error, err.reason);
+      }
+    });
+
+  }
+});
