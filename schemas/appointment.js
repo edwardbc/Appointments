@@ -14,27 +14,27 @@ AppointmentSchema = new SimpleSchema({
   doctor: {
     type     : Object
   },
-  'doctor._id': {
-    type     : String,
-    optional : true
+    'doctor._id' : {
+    type         : String,
+    optional     : true
   },
   'doctor.name': {
     type     : String,
     optional : true
   },
-  'doctor.specialties': {
-    type     : [String],
+  'doctor.specialty': {
+    type     : String,
     optional : true
   },
   tags: {
     type     : [String],
     label    : "Etiquetas",
-    minCount : 1,
+    optional : true
   },
   notes: {
-    type  : String,
-    label : "Notas",
-    optional: true
+    type     : String,
+    label    : "Notas",
+    optional : true
   }
 }, {
   defineBuiltInRegExMessages : false

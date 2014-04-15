@@ -20,10 +20,9 @@ DoctorSchema = new SimpleSchema({
     label : "Correo",
     regEx : SimpleSchema.RegEx.Email
   },
-  specialties: {
-    type     : [String],
-    label    : "Especialidades",
-    minCount : 1,
+  specialty: {
+    type     : String,
+    label    : "Especialidad"
   },
   clinic: {
     type  : String,

@@ -1,6 +1,9 @@
 Template.doctorForm.helpers({
   isNew: function(){
     return (!this._id);
+  },
+  specialties : function(){
+    return MedicalSpecialties;
   }
 });
 
@@ -12,9 +15,6 @@ Template.doctorForm.events({
         fields = Utils.forms.objectify(form),
         isValid;
 
-    // Parse specialties
-    fields.specialties = ($.trim(fields.specialties).length>0) ? 
-      fields.specialties.split(',') : [];
     // Associate with current user
     fields.userId = Meteor.userId();
     // Validate

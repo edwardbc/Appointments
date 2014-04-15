@@ -16,19 +16,17 @@ Template.appointmentForm.events({
         fields = Utils.forms.objectify(form),
         isValid;
 
-    _.extend(fields,{
-      userId : Meteor.userId()
-    });
-    var date = fields.date+'';
-    fields.date = moment(date+' '+fields.time,'DD/MM/YYYY').toDate()
 
-    
-    fields.doctor = (fields.doctor) ? 
-      _.pick(Doctors.findOne(fields.doctor), '_id', 'name', 'specialties') : null;
+    fields.userId = Meteor.userId();
+    if (fields.date)
+      fields.date = moment(fields.date+' '+fields.time,'DD/MM/YYYY HH:mm').toDate()
 
-    // Parse tags
+    if (fields.doctor)
+    fields.doctor = 
+      _.pick(Doctors.findOne(fields.doctor), '_id', 'name', 'specialty');
+
     fields.tags = ($.trim(fields.tags).length>0) ? 
-      fields.tags.split(',') : [];
+        $.trim(fields.tags).split(',') : [];
 
     // Remove unused fields to avoid schema conflicts
     delete fields.time;
@@ -57,6 +55,7 @@ Template.appointmentForm.events({
       }
 
       // Highlight invalid inputs
+      console.log(invalidKeys);
       Utils.forms.highlight(form, invalidKeys);
 
     } else {

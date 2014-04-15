@@ -17,9 +17,8 @@
     </div>
 
     <div class="form-group">
-      <label class="control-label" for="user">Especialidades</label>
-      <input type="text" class="form-control" name="specialties" value="{{specialties}}">
-      <p class="help-block">Especialidades separadas por comas</p>
+      <label class="control-label" for="user">Especialidad</label>
+      {{> selectbox data=specialties list=true name='specialty' value=specialty }}
     </div>
 
     <div class="form-group">

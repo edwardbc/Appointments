@@ -22,9 +22,7 @@
 <template name="doctorListItem">
   <tr>
     <td>{{name}}</td>
-    <td>{{#each specialties}} 
-      {{this}}   
-    {{/each}}</td>
+    <td>{{specialty}}</td>
     <td>{{clinic}}</td>
     <td class="actions">
       <a href="{{pathFor 'editDoctor'}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
