@@ -26,6 +26,13 @@ Chart.bars = function(dataset, options){
     .append('g')
       .attr('transform', 'translate('+margin.left+','+margin.top+')');   
 
+  chart.append('text')
+    .attr('class', 'title')
+    .attr('transform', 'translate('+w/2+', -12)')
+    .attr('dy', '.35em')
+    .style('text-anchor', 'middle')
+    .text(options.title);
+
   // Scales
   var x = d3.time.scale()
     .domain([ranges.start, ranges.end])

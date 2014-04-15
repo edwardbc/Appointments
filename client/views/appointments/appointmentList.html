@@ -1,12 +1,12 @@
 <template name="appointmentList">
     <div class="table-responsive">
-    <table class="table table-hover">
+    <table class="table table-hover table-striped">
       <thead>
         <tr>
           <th>Fecha</th>
-          <th>Hora</th>
-          <th>Etiquetas</th>
+          <th>Especialidad</th>
           <th>Doctor</th>
+          <th>Hora</th>
           <th></th>
         </tr>
       </thead>
@@ -26,13 +26,9 @@
 <template name="appointmentListItem">
   <tr>
     <td>{{formatDate date format="DD/MM/YY"}}</td>
-    <td>{{formatDate date format="hh:mm a"}}</td>
-    <td>
-      {{#each tags}} 
-        {{this}}   
-      {{/each}}
-    </td>
+    <td>{{doctor.specialty}}</td>
     <td>{{doctor.name}}</td>
+    <td>{{formatDate date format="hh:mm a"}}</td>
     <td class="actions">
       <a href="{{pathFor 'editAppointment'}}" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>
       <button type="button" class="btn btn-danger btn-sm remove"><span class="glyphicon glyphicon-remove"></span> Eliminar</button>

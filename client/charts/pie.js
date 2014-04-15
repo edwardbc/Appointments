@@ -9,17 +9,20 @@ Chart.pie = function(dataset, options){
     },
     w = options.width - margin.left - margin.right,
     h = options.height - margin.top - margin.bottom,
-    r = Math.min(w, h) / 2.4;
+    r = Math.min(w, h) / 2.4,
+    labelOffset = 1.4;
 
   var color = d3.scale.category20();
 
   var arc = d3.svg.arc()
-    .outerRadius(r-10)
-    .innerRadius(r-(r/3));
+    .outerRadius(r-30)
+    .innerRadius(r-(r/2));
 
   var pie = d3.layout.pie()
     .sort(null)
     .value(function(d){ return d.count; });
+
+  $(options.element).html(''); // Temporal refresh
 
   var chart = d3.select(options.element)
     .append('svg')
@@ -29,35 +32,28 @@ Chart.pie = function(dataset, options){
     .append('g')
       .attr('transform', 'translate('+w/2 + ','+ h/2+')');
 
-  var dataset = this.data  = [
-    { name: 'name1', count:50 },
-    { name: 'name2', count:30 },
-    { name: 'name3', count:10 },
-    { name: 'name4', count:10 }
-  ];
+  chart.append('text')
+    .attr('class', 'title')
+    .attr('transform', 'translate(0,-'+(h/2-8)+')')
+    .attr('dy', '.35em')
+    .style('text-anchor', 'middle')
+    .text(options.title);
 
   this.parseData = function(dataset){
+    dataset.rewind();
     var nestFunction = d3.nest().key( function(d){
-      return d.name; 
+      return d.doctor.specialty;
     });
-
-    // this.data = nestFunction.entries(dataset.fetch());
-    this.data = dataset;
-    return;
-    this.data = nestFunction.entries(dataset);
+    this.data = nestFunction.entries(dataset.fetch());
     this.data.forEach(function(dateGroup){
+      dateGroup.name =  dateGroup.key;
       dateGroup.count = dateGroup.values.length;
-      // dateGroup.values.forEach(function(row){
-      //   dateGroup.date = row.date;
-      // });
     });
   };
 
   // Currently not reactive
   this.update = function(dataset){
-    if (dataset){
-      this.parseData(dataset);
-    }
+    this.parseData(dataset);
 
     var g = chart.selectAll('.arc')
         .data(pie(this.data), function(d){ return d.data.name});
@@ -73,7 +69,7 @@ Chart.pie = function(dataset, options){
     pieEnter.append('text')
       .attr('transform', function(d){ 
         var c = arc.centroid(d);
-        return "translate(" + c[0]*1.4 +"," + c[1]*1.4 + ")";
+        return "translate(" + c[0]*labelOffset +"," + c[1]*labelOffset + ")";
       })
       .attr('dy', '.35em')
       .style('text-anchor', 'middle')

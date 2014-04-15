@@ -1,6 +1,7 @@
 Template.selectbox.helpers({
   isSelected: function(value){
-    return (this._id == value) ?
+    var current = this._id || this;
+    return (current == value) ?
         'selected' : '';
   }
 });

@@ -16,13 +16,16 @@ _.extend(Utils.forms, {
   // array of invalid keys. Clear highlights if not provided
   highlight: function(form, invalidKeys){
     if (invalidKeys){
-      form.find('input, select').each(function(){
+      form.find(':input').each(function(){
           var name   = $(this).attr('name'),
               parent = $(this).parent(), 
-              isInvalid = _.contains(invalidKeys, name);
+              isInvalid = _.contains(invalidKeys, name),
+              value = $(this).val();
           
-          parent.toggleClass('has-error', isInvalid)
-                .toggleClass('has-success', !isInvalid);
+          parent.toggleClass('has-error', isInvalid);
+          if (value && value!==''){
+            parent.toggleClass('has-success', !isInvalid);
+          }
         });
     } else {
       form.find('.form-group').removeClass('has-error has-success');
