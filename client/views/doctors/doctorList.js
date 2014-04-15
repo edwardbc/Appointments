@@ -1,6 +1,6 @@
 Template.doctorList.helpers({
   doctors: function(){
-    return Doctors.find();
+    return Doctors.find({}, { sort: { name:1 } });
   },
   count : function(){
     return Doctors.find().count();

@@ -23,7 +23,7 @@ MedicalSpecialties = [
   'Infectología',
   'Infectología Pediátrica',
   'Inmunología Clínica Médica',
-  'Medicina Crítica Pediátrica *',
+  'Medicina Crítica Pediátrica',
   'Medicina Crítica y Terapia Intensiva',
   'Medicina de Emergencias',
   'Medicina Familiar y Comunitaria',
