@@ -85,7 +85,7 @@ Chart.bars = function(dataset, options){
     if (dataset){
       this.parseData(dataset);
     }
-    console.log('redrwa');
+    
     y.domain([0, d3.max(this.data, function(d){ return (d.count) } )]);
     
     var bar = chart.selectAll('.bar')
